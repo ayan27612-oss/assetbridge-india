@@ -1,743 +1,1232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ASSETBRIDGE INDIA | Commercial & Industrial Real Estate</title>
+<title>ASSETBRIDGE INDIA | Commercial & Industrial Real Estate</title>
 
-  <meta name="description" content="ASSETBRIDGE INDIA connects serious buyers and sellers of commercial and industrial real estate across India.">
+<meta name="description" content="ASSETBRIDGE INDIA connects buyers and sellers of commercial and industrial real estate, including industrial land, factories, warehouses and large-scale assets.">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://images.unsplash.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#080a0d;
+    --bg2:#0d1014;
+    --card:#11151a;
+    --card2:#151a20;
+    --text:#f5f5f2;
+    --muted:#9ca3aa;
+    --gold:#c7a66a;
+    --gold2:#e1c58e;
+    --border:rgba(255,255,255,.09);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter, sans-serif;
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+img{
+    width:100%;
+    display:block;
+}
+
+/* ================= NAV ================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    padding:20px 6%;
+    transition:.4s ease;
+}
+
+.navbar.scrolled{
+    padding:13px 6%;
+    background:rgba(8,10,13,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+    max-width:1400px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-family:Manrope,sans-serif;
+    font-weight:800;
+    font-size:20px;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:var(--gold);
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+    align-items:center;
+}
+
+.nav-links a{
+    color:#c9cdd1;
+    font-size:13px;
+    font-weight:500;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-contact{
+    padding:11px 18px;
+    border:1px solid rgba(199,166,106,.55);
+    color:var(--gold)!important;
+}
+
+.menu{
+    display:none;
+    font-size:25px;
+    cursor:pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+}
+
+.hero-bg{
+    position:absolute;
+    inset:0;
+    background:
+    linear-gradient(90deg,rgba(5,7,9,.96) 10%,rgba(5,7,9,.72) 45%,rgba(5,7,9,.28)),
+    url("https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=2200&q=85")
+    center/cover;
+    transform:scale(1.05);
+    animation:heroZoom 12s ease forwards;
+}
+
+@keyframes heroZoom{
+    from{transform:scale(1.05)}
+    to{transform:scale(1)}
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:1400px;
+    width:100%;
+    margin:auto;
+    padding:140px 6% 80px;
+}
+
+.eyebrow{
+    color:var(--gold);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:4px;
+    margin-bottom:25px;
+    opacity:0;
+    animation:fadeUp .8s .2s forwards;
+}
+
+.hero h1{
+    max-width:850px;
+    font-family:Manrope,sans-serif;
+    font-size:clamp(48px,7vw,92px);
+    line-height:1.02;
+    letter-spacing:-4px;
+    opacity:0;
+    animation:fadeUp 1s .4s forwards;
+}
+
+.hero h1 span{
+    color:var(--gold);
+}
+
+.hero-text{
+    max-width:600px;
+    margin-top:28px;
+    color:#c3c7ca;
+    line-height:1.8;
+    font-size:16px;
+    opacity:0;
+    animation:fadeUp 1s .6s forwards;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:14px;
+    margin-top:38px;
+    opacity:0;
+    animation:fadeUp 1s .8s forwards;
+}
+
+.btn{
+    padding:15px 23px;
+    font-size:13px;
+    font-weight:600;
+    transition:.35s;
+    border:1px solid var(--border);
+}
+
+.btn-primary{
+    background:var(--gold);
+    color:#090a0b;
+}
+
+.btn-primary:hover{
+    background:var(--gold2);
+    transform:translateY(-3px);
+}
+
+.btn-outline{
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(10px);
+}
+
+.btn-outline:hover{
+    border-color:var(--gold);
+    transform:translateY(-3px);
+}
+
+.hero-line{
+    position:absolute;
+    bottom:40px;
+    left:6%;
+    width:100px;
+    height:1px;
+    background:var(--gold);
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+    padding:110px 6%;
+}
+
+.section-inner{
+    max-width:1400px;
+    margin:auto;
+}
+
+.section-label{
+    color:var(--gold);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:3px;
+    margin-bottom:17px;
+}
+
+.section-title{
+    font-family:Manrope,sans-serif;
+    font-size:clamp(34px,4vw,58px);
+    letter-spacing:-2px;
+    line-height:1.08;
+}
+
+.section-desc{
+    max-width:650px;
+    margin-top:20px;
+    color:var(--muted);
+    line-height:1.8;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    background:var(--bg2);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
+
+.stat{
+    padding:45px 25px;
+    border-right:1px solid var(--border);
+    text-align:center;
+}
+
+.stat:last-child{
+    border-right:none;
+}
+
+.stat-number{
+    font-family:Manrope,sans-serif;
+    font-size:42px;
+    font-weight:800;
+    color:var(--gold);
+}
+
+.stat p{
+    margin-top:8px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* ================= CATEGORIES ================= */
+
+.category-grid{
+    margin-top:55px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.category{
+    min-height:250px;
+    padding:30px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--border);
+    background:var(--card);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    transition:.5s;
+}
+
+.category-bg{
+    position:absolute;
+    inset:0;
+    opacity:.42;
+    transition:.7s;
+}
+
+.category-bg img{
+    height:100%;
+    object-fit:cover;
+}
+
+.category:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(transparent 20%,rgba(0,0,0,.92));
+}
+
+.category-content{
+    position:relative;
+    z-index:2;
+}
+
+.category h3{
+    font-family:Manrope,sans-serif;
+    font-size:21px;
+}
+
+.category p{
+    color:#aeb4b9;
+    font-size:12px;
+    margin-top:8px;
+}
+
+.category:hover{
+    transform:translateY(-7px);
+    border-color:rgba(199,166,106,.55);
+}
+
+.category:hover .category-bg{
+    transform:scale(1.08);
+    opacity:.58;
+}
+
+/* ================= FEATURED ================= */
+
+.featured{
+    background:#0b0e12;
+}
+
+.property-grid{
+    margin-top:55px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.property{
+    background:var(--card);
+    border:1px solid var(--border);
+    overflow:hidden;
+    transition:.5s;
+}
+
+.property:hover{
+    transform:translateY(-8px);
+    border-color:rgba(199,166,106,.5);
+}
+
+.property-image{
+    height:280px;
+    overflow:hidden;
+    position:relative;
+}
+
+.property-image img{
+    height:100%;
+    object-fit:cover;
+    transition:.7s;
+}
+
+.property:hover .property-image img{
+    transform:scale(1.07);
+}
+
+.property-tag{
+    position:absolute;
+    top:15px;
+    left:15px;
+    background:rgba(8,10,13,.85);
+    backdrop-filter:blur(10px);
+    padding:8px 11px;
+    font-size:10px;
+    color:var(--gold);
+    letter-spacing:1px;
+}
+
+.property-body{
+    padding:25px;
+}
+
+.property-body h3{
+    font-family:Manrope,sans-serif;
+    font-size:20px;
+}
+
+.property-body p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:9px;
+    line-height:1.6;
+}
+
+.property-link{
+    display:inline-block;
+    margin-top:20px;
+    color:var(--gold);
+    font-size:12px;
+    font-weight:700;
+}
+
+/* ================= ABOUT ================= */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:center;
+}
+
+.about-image{
+    height:560px;
+    overflow:hidden;
+}
+
+.about-image img{
+    height:100%;
+    object-fit:cover;
+    transition:1s;
+}
+
+.about-image:hover img{
+    transform:scale(1.04);
+}
+
+.about-copy p{
+    color:var(--muted);
+    line-height:1.9;
+    margin-top:25px;
+}
+
+.about-list{
+    margin-top:30px;
+    display:grid;
+    gap:13px;
+}
+
+.about-list div{
+    border-left:2px solid var(--gold);
+    padding-left:15px;
+    color:#d6d8da;
+    font-size:13px;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    padding:100px 6%;
+    background:
+    linear-gradient(90deg,rgba(5,7,9,.96),rgba(5,7,9,.82)),
+    url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2200&q=85")
+    center/cover;
+}
+
+.cta-box{
+    max-width:1400px;
+    margin:auto;
+}
+
+.cta h2{
+    font-family:Manrope,sans-serif;
+    font-size:clamp(40px,5vw,70px);
+    letter-spacing:-3px;
+    max-width:800px;
+}
+
+.cta p{
+    color:#adb3b7;
+    max-width:600px;
+    line-height:1.8;
+    margin-top:20px;
+}
+
+.contact-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:32px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#060709;
+    padding:45px 6%;
+    border-top:1px solid var(--border);
+}
+
+.footer-inner{
+    max-width:1400px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+}
+
+.footer-brand{
+    font-family:Manrope,sans-serif;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.footer-brand span{
+    color:var(--gold);
+}
+
+.footer-copy{
+    color:#777d82;
+    font-size:11px;
+    margin-top:10px;
+}
+
+.footer-contact{
+    text-align:right;
+    color:#999fa4;
+    font-size:12px;
+    line-height:1.8;
+}
+
+/* ================= WHATSAPP ================= */
+
+.whatsapp{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    z-index:999;
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    background:#25D366;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    transition:.3s;
+}
+
+.whatsapp:hover{
+    transform:scale(1.1);
+}
+
+/* ================= REVEAL ================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:1s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+    .navbar{
+        padding:18px 5%;
     }
 
-    html {
-      scroll-behavior: smooth;
+    .nav-links{
+        position:absolute;
+        top:72px;
+        left:5%;
+        right:5%;
+        background:rgba(12,15,18,.97);
+        backdrop-filter:blur(20px);
+        border:1px solid var(--border);
+        padding:20px;
+        display:none;
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0b0e12;
-      color: #ffffff;
-      line-height: 1.6;
+    .nav-links.open{
+        display:flex;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    .menu{
+        display:block;
     }
 
-    .container {
-      width: min(1150px, 92%);
-      margin: auto;
+    .nav-contact{
+        width:100%;
+        text-align:center;
     }
 
-    /* HEADER */
-
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(11,14,18,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+    .hero-content{
+        padding:130px 5% 80px;
     }
 
-    nav {
-      height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .hero h1{
+        font-size:50px;
+        letter-spacing:-2.5px;
     }
 
-    .logo {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: 1px;
+    .hero-text{
+        font-size:14px;
     }
 
-    .logo span {
-      color: #c8a96b;
+    .hero-buttons{
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      list-style: none;
-      font-size: 14px;
-      color: #c7cbd1;
+    .btn{
+        width:100%;
+        text-align:center;
     }
 
-    .nav-links a:hover {
-      color: #c8a96b;
+    section{
+        padding:80px 5%;
     }
 
-    .nav-button {
-      padding: 11px 18px;
-      border: 1px solid #c8a96b;
-      color: #c8a96b;
-      border-radius: 4px;
-      font-size: 13px;
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    /* HERO */
-
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      background:
-        linear-gradient(90deg, rgba(7,9,12,0.96), rgba(7,9,12,0.72), rgba(7,9,12,0.9)),
-        url("https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1800&q=85")
-        center/cover;
+    .stat{
+        border-bottom:1px solid var(--border);
     }
 
-    .hero-content {
-      max-width: 760px;
-      padding-top: 80px;
+    .category-grid,
+    .property-grid{
+        grid-template-columns:1fr;
     }
 
-    .eyebrow {
-      color: #c8a96b;
-      letter-spacing: 3px;
-      font-size: 12px;
-      font-weight: bold;
-      margin-bottom: 20px;
+    .category{
+        min-height:220px;
     }
 
-    h1 {
-      font-size: clamp(44px, 8vw, 82px);
-      line-height: 1.02;
-      letter-spacing: -3px;
-      margin-bottom: 25px;
+    .about-grid{
+        grid-template-columns:1fr;
+        gap:45px;
     }
 
-    h1 span {
-      color: #c8a96b;
+    .about-image{
+        height:400px;
     }
 
-    .hero p {
-      max-width: 650px;
-      color: #c4c8ce;
-      font-size: 18px;
-      margin-bottom: 35px;
+    .cta{
+        padding:80px 5%;
     }
 
-    .buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
+    .footer-inner{
+        flex-direction:column;
     }
 
-    .button {
-      display: inline-block;
-      padding: 15px 24px;
-      border-radius: 4px;
-      font-weight: bold;
-      font-size: 14px;
+    .footer-contact{
+        text-align:left;
     }
 
-    .primary {
-      background: #c8a96b;
-      color: #0b0e12;
-    }
+}
 
-    .secondary {
-      border: 1px solid rgba(255,255,255,0.3);
-      color: white;
-    }
-
-    /* SECTIONS */
-
-    section {
-      padding: 100px 0;
-    }
-
-    .section-label {
-      color: #c8a96b;
-      font-size: 12px;
-      letter-spacing: 2px;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-size: clamp(32px, 5vw, 50px);
-      margin-bottom: 15px;
-      line-height: 1.1;
-    }
-
-    .section-text {
-      color: #aeb4bc;
-      max-width: 680px;
-      margin-bottom: 50px;
-    }
-
-    /* CATEGORIES */
-
-    .categories {
-      background: #101419;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .card {
-      min-height: 220px;
-      padding: 30px;
-      background: #151a20;
-      border: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: #c8a96b;
-    }
-
-    .card-number {
-      color: #c8a96b;
-      font-size: 12px;
-      margin-bottom: auto;
-    }
-
-    .card h3 {
-      font-size: 22px;
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      color: #9299a2;
-      font-size: 14px;
-    }
-
-    /* FEATURED */
-
-    .property {
-      background: #0b0e12;
-      border: 1px solid rgba(255,255,255,0.08);
-      overflow: hidden;
-    }
-
-    .property-image {
-      height: 240px;
-      background:
-        linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.3)),
-        url("https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1000&q=80")
-        center/cover;
-    }
-
-    .property-info {
-      padding: 25px;
-    }
-
-    .property-tag {
-      color: #c8a96b;
-      font-size: 11px;
-      letter-spacing: 1px;
-      font-weight: bold;
-    }
-
-    .property h3 {
-      font-size: 24px;
-      margin: 8px 0;
-    }
-
-    .property p {
-      color: #9299a2;
-      font-size: 14px;
-      margin-bottom: 18px;
-    }
-
-    .property-link {
-      color: #c8a96b;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    /* ABOUT */
-
-    .about {
-      background: #101419;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
-      align-items: center;
-    }
-
-    .about-box {
-      border-left: 2px solid #c8a96b;
-      padding-left: 25px;
-    }
-
-    .about-box h3 {
-      font-size: 28px;
-      margin-bottom: 15px;
-    }
-
-    .about-box p {
-      color: #aeb4bc;
-    }
-
-    /* CTA */
-
-    .cta {
-      text-align: center;
-      background: #151a20;
-    }
-
-    .cta .section-text {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* FOOTER */
-
-    footer {
-      padding: 45px 0;
-      background: #07090c;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .footer-grid {
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    .footer-brand p {
-      color: #777f89;
-      font-size: 13px;
-      margin-top: 10px;
-    }
-
-    .footer-right {
-      color: #777f89;
-      font-size: 13px;
-      text-align: right;
-    }
-
-    /* WHATSAPP */
-
-    .whatsapp {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 2000;
-      padding: 14px 18px;
-      background: #ffffff;
-      color: #111111;
-      border-radius: 30px;
-      font-weight: bold;
-      font-size: 13px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 800px) {
-
-      nav {
-        height: 68px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .nav-button {
-        padding: 9px 13px;
-      }
-
-      .hero {
-        min-height: 90vh;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-
-      section {
-        padding: 75px 0;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
-      }
-
-      .property-image {
-        height: 210px;
-      }
-
-      .footer-right {
-        text-align: left;
-      }
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-
-  <header>
-    <div class="container">
-      <nav>
-        <a href="#" class="logo">
-          ASSETBRIDGE <span>INDIA</span>
-        </a>
-
-        <ul class="nav-links">
-          <li><a href="#properties">Opportunities</a></li>
-          <li><a href="#focus">Our Focus</a></li>
-          <li><a href="#about">About</a></li>
-        </ul>
-
-        <a href="#contact" class="nav-button">
-          CONTACT
-        </a>
-      </nav>
-    </div>
-  </header>
-
-
-  <!-- HERO -->
-
-  <main>
-
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-
-          <div class="eyebrow">
-            COMMERCIAL & INDUSTRIAL REAL ESTATE
-          </div>
-
-          <h1>
-            Connecting<br>
-            <span>Assets</span> With Opportunity.
-          </h1>
-
-          <p>
-            ASSETBRIDGE INDIA connects serious buyers and sellers
-            across India's commercial and industrial real estate market.
-          </p>
-
-          <div class="buttons">
-            <a href="#properties" class="button primary">
-              VIEW OPPORTUNITIES
-            </a>
-
-            <a href="#contact" class="button secondary">
-              LIST YOUR ASSET
-            </a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- FOCUS -->
-
-    <section class="categories" id="focus">
-      <div class="container">
-
-        <div class="section-label">
-          OUR FOCUS
-        </div>
-
-        <h2 class="section-title">
-          Key Asset Categories
-        </h2>
-
-        <p class="section-text">
-          Focused on significant commercial and industrial
-          opportunities across India.
-        </p>
-
-        <div class="grid">
-
-          <div class="card">
-            <div class="card-number">01</div>
-            <h3>Industrial Land</h3>
-            <p>
-              Large-scale industrial and development land opportunities.
-            </p>
-          </div>
+<!-- NAVIGATION -->
 
-          <div class="card">
-            <div class="card-number">02</div>
-            <h3>Factories & Plants</h3>
-            <p>
-              Operating and non-operating manufacturing facilities.
-            </p>
-          </div>
+<nav class="navbar" id="navbar">
 
-          <div class="card">
-            <div class="card-number">03</div>
-            <h3>Warehouses</h3>
-            <p>
-              Logistics, storage and distribution assets.
-            </p>
-          </div>
+<div class="nav-inner">
 
-          <div class="card">
-            <div class="card-number">04</div>
-            <h3>Commercial Assets</h3>
-            <p>
-              Commercial properties and investment opportunities.
-            </p>
-          </div>
+<a href="#home" class="logo">
+ASSETBRIDGE <span>INDIA</span>
+</a>
 
-          <div class="card">
-            <div class="card-number">05</div>
-            <h3>Large-Scale Opportunities</h3>
-            <p>
-              Significant assets requiring qualified buyers and investors.
-            </p>
-          </div>
+<div class="menu" onclick="toggleMenu()">☰</div>
 
-          <div class="card">
-            <div class="card-number">06</div>
-            <h3>Off-Market Assets</h3>
-            <p>
-              Select opportunities available through direct networks.
-            </p>
-          </div>
+<div class="nav-links" id="navLinks">
 
-        </div>
-      </div>
-    </section>
+<a href="#home">HOME</a>
+<a href="#categories">CATEGORIES</a>
+<a href="#opportunities">OPPORTUNITIES</a>
+<a href="#about">ABOUT</a>
 
+<a href="#contact" class="nav-contact">CONTACT</a>
 
-    <!-- FEATURED -->
+</div>
 
-    <section id="properties">
-      <div class="container">
+</div>
 
-        <div class="section-label">
-          FEATURED OPPORTUNITY
-        </div>
+</nav>
 
-        <h2 class="section-title">
-          Selected Assets
-        </h2>
 
-        <p class="section-text">
-          A preview of opportunities handled by ASSETBRIDGE INDIA.
-        </p>
+<!-- HERO -->
 
-        <div class="grid">
+<section class="hero" id="home">
 
-          <div class="property">
+<div class="hero-bg"></div>
 
-            <div class="property-image"></div>
+<div class="hero-content">
 
-            <div class="property-info">
+<div class="eyebrow">
+COMMERCIAL & INDUSTRIAL REAL ESTATE
+</div>
 
-              <div class="property-tag">
-                INDUSTRIAL OPPORTUNITY
-              </div>
+<h1>
+Connecting <span>Assets.</span><br>
+Creating Opportunities.
+</h1>
 
-              <h3>
-                Large Industrial Asset
-              </h3>
+<p class="hero-text">
+ASSETBRIDGE INDIA connects serious buyers and sellers across
+commercial and industrial real estate, with a focus on land,
+factories, warehouses and large-scale opportunities.
+</p>
 
-              <p>
-                Maharashtra, India · Details available to qualified parties.
-              </p>
+<div class="hero-buttons">
 
-              <a href="#contact" class="property-link">
-                REQUEST DETAILS →
-              </a>
+<a href="#opportunities" class="btn btn-primary">
+EXPLORE OPPORTUNITIES
+</a>
 
-            </div>
-          </div>
+<a href="#contact" class="btn btn-outline">
+CONTACT US
+</a>
 
-          <div class="property">
+</div>
 
-            <div class="property-image"></div>
+</div>
 
-            <div class="property-info">
+<div class="hero-line"></div>
 
-              <div class="property-tag">
-                COMMERCIAL OPPORTUNITY
-              </div>
+</section>
 
-              <h3>
-                Commercial Property
-              </h3>
 
-              <p>
-                India · Detailed information available on enquiry.
-              </p>
+<!-- STATS -->
 
-              <a href="#contact" class="property-link">
-                REQUEST DETAILS →
-              </a>
+<section class="stats">
 
-            </div>
-          </div>
+<div class="section-inner stats-grid">
 
-        </div>
-      </div>
-    </section>
+<div class="stat reveal">
+<div class="stat-number" data-target="6">0</div>
+<p>KEY ASSET CATEGORIES</p>
+</div>
 
+<div class="stat reveal">
+<div class="stat-number" data-target="100">0</div>
+<p>% FOCUSED ON REAL ASSETS</p>
+</div>
 
-    <!-- ABOUT -->
+<div class="stat reveal">
+<div class="stat-number">24/7</div>
+<p>DIRECT CONTACT</p>
+</div>
 
-    <section class="about" id="about">
+<div class="stat reveal">
+<div class="stat-number">INDIA</div>
+<p>MARKET FOCUS</p>
+</div>
 
-      <div class="container">
+</div>
 
-        <div class="about-grid">
+</section>
 
-          <div>
-            <div class="section-label">
-              ABOUT ASSETBRIDGE INDIA
-            </div>
 
-            <h2 class="section-title">
-              Where Serious Assets Meet Serious Buyers.
-            </h2>
-          </div>
+<!-- CATEGORIES -->
 
-          <div class="about-box">
+<section id="categories">
 
-            <h3>
-              Built around connections.
-            </h3>
+<div class="section-inner">
 
-            <p>
-              ASSETBRIDGE INDIA focuses on connecting owners,
-              investors, companies and qualified buyers with
-              commercial and industrial real estate opportunities
-              across India.
-            </p>
+<div class="section-label reveal">
+WHAT WE FOCUS ON
+</div>
 
-            <br>
+<h2 class="section-title reveal">
+Key Asset Categories
+</h2>
 
-            <p>
-              Our focus is simple: identify meaningful assets,
-              present them professionally and create direct
-              connections between the right parties.
-            </p>
+<p class="section-desc reveal">
+We focus on high-value commercial and industrial assets
+where location, scale and strategic value matter.
+</p>
 
-          </div>
 
-        </div>
+<div class="category-grid">
 
-      </div>
+<div class="category reveal">
 
-    </section>
+<div class="category-bg">
+<img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80">
+</div>
 
+<div class="category-content">
+<h3>Industrial Land</h3>
+<p>Strategic land for industrial development and expansion.</p>
+</div>
 
-    <!-- CONTACT -->
+</div>
 
-    <section class="cta" id="contact">
 
-      <div class="container">
+<div class="category reveal">
 
-        <div class="section-label">
-          START A CONVERSATION
-        </div>
+<div class="category-bg">
+<img src="https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=1200&q=80">
+</div>
 
-        <h2 class="section-title">
-          Have an Asset or Looking for One?
-        </h2>
+<div class="category-content">
+<h3>Factories & Plants</h3>
+<p>Manufacturing facilities and operational industrial assets.</p>
+</div>
 
-        <p class="section-text">
-          Tell us what you are looking to buy or sell.
-          Serious enquiries are welcome.
-        </p>
+</div>
 
-        <div class="buttons" style="justify-content:center;">
 
-          <a
-            href="mailto:contact@assetbridgeindia.com"
-            class="button primary">
-            EMAIL US
-          </a>
+<div class="category reveal">
 
-          <a
-            href="tel:+919579359064"
-            class="button secondary">
-            CALL US
-          </a>
+<div class="category-bg">
+<img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80">
+</div>
 
-        </div>
+<div class="category-content">
+<h3>Warehouses</h3>
+<p>Logistics, storage and distribution opportunities.</p>
+</div>
 
-      </div>
+</div>
 
-    </section>
 
-  </main>
+<div class="category reveal">
 
+<div class="category-bg">
+<img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80">
+</div>
 
-  <!-- FOOTER -->
+<div class="category-content">
+<h3>Commercial Assets</h3>
+<p>Commercial properties positioned for strategic value.</p>
+</div>
 
-  <footer>
+</div>
 
-    <div class="container">
 
-      <div class="footer-grid">
+<div class="category reveal">
 
-        <div class="footer-brand">
+<div class="category-bg">
+<img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80">
+</div>
 
-          <div class="logo">
-            ASSETBRIDGE <span>INDIA</span>
-          </div>
+<div class="category-content">
+<h3>Large-Scale Opportunities</h3>
+<p>High-value assets and large-scale transactions.</p>
+</div>
 
-          <p>
-            Commercial & Industrial Real Estate
-          </p>
+</div>
 
-        </div>
 
-        <div class="footer-right">
+<div class="category reveal">
 
-          © 2026 ASSETBRIDGE INDIA<br>
-          All Rights Reserved.
+<div class="category-bg">
+<img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80">
+</div>
 
-        </div>
+<div class="category-content">
+<h3>Off-Market Assets</h3>
+<p>Private opportunities sourced through direct connections.</p>
+</div>
 
-      </div>
+</div>
 
-    </div>
+</div>
 
-  </footer>
+</div>
 
+</section>
 
-  <!-- WHATSAPP -->
 
-  <a
-    href="https://wa.me/7066787771"
-    class="whatsapp">
-    WhatsApp
-  </a>
+<!-- FEATURED -->
 
-</body>
-                </html>
+<section class="featured" id="opportunities">
+
+<div class="section-inner">
+
+<div class="section-label reveal">
+FEATURED OPPORTUNITIES
+</div>
+
+<h2 class="section-title reveal">
+Selected Asset Opportunities
+</h2>
+
+<p class="section-desc reveal">
+A preview of the type of commercial and industrial
+assets ASSETBRIDGE INDIA is positioned to connect.
+</p>
+
+
+<div class="property-grid">
+
+<div class="property reveal">
+
+<div class="property-image">
+
+<img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1400&q=80">
+
+<div class="property-tag">
+INDUSTRIAL
+</div>
+
+</div>
+
+<div class="property-body">
+
+<h3>Industrial Development Land</h3>
+
+<p>
+Large-scale land opportunity suitable for industrial
+development, manufacturing or strategic expansion.
+</p>
+
+<a href="#contact" class="property-link">
+ENQUIRE →
+</a>
+
+</div>
+
+</div>
+
+
+<div class="property reveal">
+
+<div class="property-image">
+
+<img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1400&q=80">
+
+<div class="property-tag">
+MANUFACTURING
+</div>
+
+</div>
+
+<div class="property-body">
+
+<h3>Factory & Plant Assets</h3>
+
+<p>
+Operational and non-operational industrial facilities
+for strategic acquisition and investment.
+</p>
+
+<a href="#contact" class="property-link">
+ENQUIRE →
+</a>
+
+</div>
+
+</div>
+
+
+<div class="property reveal">
+
+<div class="property-image">
+
+<img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1400&q=80">
+
+<div class="property-tag">
+LOGISTICS
+</div>
+
+</div>
+
+<div class="property-body">
+
+<h3>Warehouse Opportunity</h3>
+
+<p>
+Large-format warehousing and logistics assets for
+business expansion and investment.
+</p>
+
+<a href="#contact" class="property-link">
+ENQUIRE →
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+<div class="section-inner about-grid">
+
+<div class="about-image reveal">
+
+<img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=1500&q=85">
+
+</div>
+
+
+<div class="about-copy">
+
+<div class="section-label reveal">
+ABOUT ASSETBRIDGE INDIA
+</div>
+
+<h2 class="section-title reveal">
+Built Around Real Assets.
+</h2>
+
+<p class="reveal">
+ASSETBRIDGE INDIA is focused on connecting genuine
+commercial and industrial real estate opportunities
+with serious buyers, investors and businesses.
+</p>
+
+<p class="reveal">
+Our focus is simple: identify valuable assets,
+understand the opportunity and create direct
+connections between the right parties.
+</p>
+
+
+<div class="about-list">
+
+<div class="reveal">
+Industrial & Commercial Focus
+</div>
+
+<div class="reveal">
+Large-Scale Asset Opportunities
+</div>
+
+<div class="reveal">
+Direct Buyer-Seller Connections
+</div>
+
+<div class="reveal">
+India-Focused Market Approach
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta" id="contact">
+
+<div class="cta-box">
+
+<div class="section-label reveal">
+LET'S CONNECT
+</div>
+
+<h2 class="reveal">
+Have an Asset or Looking for One?
+</h2>
+
+<p class="reveal">
+Whether you are looking to sell, acquire or explore
+a commercial or industrial asset, connect directly
+with ASSETBRIDGE INDIA.
+</p>
+
+
+<div class="contact-buttons reveal">
+
+<a
+href="mailto:nazar.realestate.123@gmail.com"
+class="btn btn-primary">
+EMAIL US
+</a>
+
+<a
+href="tel:+919579359064"
+class="btn btn-outline">
+CALL US
+</a>
+
+<a
+href="https://wa.me/917066877771"
+class="btn btn-outline"
+target="_blank">
+WHATSAPP
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-inner">
+
+<div>
+
+<div class="footer-brand">
+ASSETBRIDGE <span>INDIA</span>
+</div>
+
+<div class="footer-copy">
+© 2026 ASSETBRIDGE INDIA. All rights reserved.
+</div>
+
+</div>
+
+
+<div class="footer-contact">
+
+9579359064<br>
+7066787771<br>
+nazar.realestate.123@gmail.com
+
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- WHATSAPP -->
+
+<a
+href="https://wa.me/917066877771"
+class="whatsapp"
+target="_blank"
+aria-label="WhatsApp">
+WA
+</a>
+
+
+<script>
+
+/* NAVBAR */
+
+window.addEventListener("scroll",function(){
+
+const nav=document.getElementById("navbar");
+
+if(window.scrollY>50){
+    nav.classList.add("scrolled");
+}else{
+    nav.classList.remove("scrolled");
+}
+
+});
+
+
+/* MOBILE MENU */
+
+function toggleMenu(){
+
+document.getElementById("navLinks")
+.classList.t
